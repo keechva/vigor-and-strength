@@ -12,17 +12,17 @@ const LINKS = [
 ];
 
 export function Header() {
-  const [isOverHero, setIsOverHero] = useState(true);
+  const [isRevealed, setIsRevealed] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const hero = document.querySelector(".hero");
     if (!hero) {
-      setIsOverHero(false);
+      setIsRevealed(true);
       return;
     }
     const observer = new IntersectionObserver(
-      ([entry]) => setIsOverHero(entry.isIntersecting),
+      ([entry]) => setIsRevealed(!entry.isIntersecting),
       { rootMargin: "-56px 0px 0px 0px", threshold: 0 },
     );
     observer.observe(hero);
@@ -43,13 +43,11 @@ export function Header() {
     };
   }, [menuOpen]);
 
-  const filled = !isOverHero;
-
   return (
     <>
       <header
-        className={`site-header${filled ? " is-filled" : ""}`}
-        data-state={filled ? "filled" : "transparent"}
+        className={`site-header${isRevealed ? " is-revealed" : ""}`}
+        data-state={isRevealed ? "revealed" : "hidden"}
       >
         <div className="wrap">
           <a className="brand" href="/">
