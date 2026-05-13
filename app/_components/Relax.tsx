@@ -18,7 +18,7 @@ export function Relax() {
           </div>
 
           <div className="copy">
-            <div className="meta">02 · Направление</div>
+            <div className="meta">02</div>
             <h2>Релакс&shy;ология</h2>
             <p>
               Слово непривычное — но точное. Тактильная работа с телом: руки

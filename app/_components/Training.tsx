@@ -8,8 +8,8 @@ export function Training() {
       <div className="wrap">
         <div className="practice training">
           <div className="copy">
-            <div className="meta">03 · Направление</div>
-            <h2>Трени&shy;ровки</h2>
+            <div className="meta">03</div>
+            <h2>Тренировки</h2>
             <p>
               Готовим направление тренировок. Кунгфу, медитации, работа с
               дыханием — собираем группы и индивидуальные расписания.

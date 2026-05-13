@@ -4,7 +4,7 @@ export function Banya() {
       <div className="wrap">
         <div className="practice">
           <div className="copy">
-            <div className="meta">01 · Направление</div>
+            <div className="meta">01</div>
             <h2>Баня</h2>
             <p>
               Баня — это вечер, который вы себе устраиваете. Не процедура. Парим

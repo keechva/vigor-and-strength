@@ -260,7 +260,7 @@ body {
   font-size: clamp(18px, 2vw, 26px);
   letter-spacing: .04em;
   color: #cdc4b3;
-  text-align: right;
+  text-align: left;
 }
 .hero .directions .dot {
   display: inline-block;
@@ -397,6 +397,9 @@ section.zone {
   align-items: start;
 }
 .practice.training .copy { padding-top: 60px; }
+.practice.training h2 {
+  text-wrap: nowrap;
+}
 
 /* ============ VIDEO SLOT ============ */
 .video-slot {
