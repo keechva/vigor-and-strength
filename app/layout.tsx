@@ -49,7 +49,10 @@ export default function RootLayout({
       lang="ru"
       className={`${lora.variable} ${inter.variable} ${jetbrains.variable}`}
     >
-      <body><Header />{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
