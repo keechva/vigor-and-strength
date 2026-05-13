@@ -613,6 +613,20 @@ section.zone {
   .masters-track { animation: none; }
 }
 
+/* touch devices: native swipe instead of auto-marquee */
+@media (hover: none) {
+  .masters-strip {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .masters-strip::-webkit-scrollbar { display: none; }
+  .masters-track { animation: none; }
+  .master { scroll-snap-align: start; }
+  .master--clone { display: none; }
+}
+
 .masters-cold-dot {
   position: absolute;
   right: 0;

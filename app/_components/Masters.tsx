@@ -40,7 +40,10 @@ function MasterCard({
   ariaHidden?: boolean;
 }) {
   return (
-    <article className="master" {...(ariaHidden ? { "aria-hidden": true } : {})}>
+    <article
+      className={ariaHidden ? "master master--clone" : "master"}
+      {...(ariaHidden ? { "aria-hidden": true } : {})}
+    >
       <div className="portrait" />
       <h3 className="name">{master.name}</h3>
       <div className="role">{master.role}</div>
