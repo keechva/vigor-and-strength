@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Lora, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { Header } from "./_components/Header";
 
 const lora = Lora({
   subsets: ["latin", "cyrillic"],
@@ -48,7 +49,7 @@ export default function RootLayout({
       lang="ru"
       className={`${lora.variable} ${inter.variable} ${jetbrains.variable}`}
     >
-      <body>{children}</body>
+      <body><Header />{children}</body>
     </html>
   );
 }
