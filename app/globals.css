@@ -175,11 +175,14 @@ body {
   padding: 80px 28px 56px;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 200ms ease;
+  visibility: hidden;
+  transition: opacity 200ms ease, visibility 0s linear 200ms;
 }
 .site-header__menu.is-open {
   opacity: 1;
   pointer-events: auto;
+  visibility: visible;
+  transition: opacity 200ms ease, visibility 0s linear 0s;
 }
 .site-header__menu ul {
   list-style: none;
