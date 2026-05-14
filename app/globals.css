@@ -311,6 +311,14 @@ body {
   height: 96px;
   background: linear-gradient(to bottom, var(--cool-bg), #6c7180 60%, var(--neutral-bg));
 }
+.bridge-cool-in {
+  height: 64px;
+  background: linear-gradient(to bottom, var(--neutral-bg), var(--cool-bg));
+}
+.bridge-cool-to-warm {
+  height: 120px;
+  background: linear-gradient(to bottom, var(--cool-bg) 0%, var(--bridge) 50%, var(--warm-bg) 100%);
+}
 
 /* ============ ZONES ============ */
 section.zone {
@@ -1130,6 +1138,137 @@ footer.site-footer .social span {
 @media (max-width: 520px) {
   .banya-hero-tags { font-size: clamp(24px, 7vw, 36px); }
   .banya-hero-cta { display: block; text-align: center; }
+}
+
+/* ============ RELAX PAGE ============ */
+
+/* hero — CTA в холодной палитре */
+.relax-hero-cta {
+  display: inline-block;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  letter-spacing: .04em;
+  padding: 16px 32px;
+  text-decoration: none;
+  background: var(--cool-deep);
+  color: var(--neutral-fg);
+  border: 1px solid var(--cool-deep);
+  transition: filter .15s;
+}
+.relax-hero-cta:hover {
+  filter: brightness(1.25);
+}
+
+/* intro — манифест + форматы + ноты в cool-зоне */
+.relax-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.relax-intro-manifesto {
+  text-align: center;
+  max-width: 62ch;
+  margin: 0 auto;
+}
+.relax-intro-manifesto h3 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0 0 28px;
+}
+.relax-intro-manifesto p {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(20px, 1.6vw, 26px);
+  line-height: 1.55;
+  margin: 0;
+}
+.relax-intro-divider {
+  width: 64px;
+  height: 1px;
+  background: var(--cool-text);
+  opacity: .35;
+  margin: 0 auto;
+}
+.relax-formats h3 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0 0 36px;
+}
+.relax-formats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.relax-format-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px;
+  border: 1px solid var(--cool-text);
+  background: rgba(0, 0, 0, .03);
+}
+.relax-format-icon {
+  font-size: 28px;
+  line-height: 1;
+  color: var(--cool-deep);
+}
+.relax-format-card h4 {
+  font-family: var(--font-serif), serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+}
+.relax-format-card p {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: .85;
+  margin: 0;
+}
+.relax-formats-note {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: .7;
+  margin: 28px 0 0;
+  max-width: 60ch;
+}
+.relax-price-note {
+  font-family: var(--font-sans), sans-serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: .7;
+  max-width: 52ch;
+  margin: 0;
+}
+
+/* approach — манифест в тёплой зоне */
+.relax-approach {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  max-width: 60ch;
+}
+.relax-approach p {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(19px, 1.4vw, 22px);
+  line-height: 1.55;
+  margin: 0;
+}
+
+@media (max-width: 880px) {
+  .relax-intro { gap: 56px; }
+  .relax-formats-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .relax-hero-cta { display: block; text-align: center; }
 }
 
 .cards {
