@@ -1494,6 +1494,96 @@ footer.site-footer .social span {
   .banya-config { padding: 24px 20px; }
 }
 
+/* ============ BANYA ADDONS — карточки + модалка ============ */
+
+.banya-addon-card {
+  cursor: pointer;
+  transition: background .15s;
+}
+.banya-addon-card:hover,
+.banya-addon-card:focus-visible {
+  background: rgba(0, 0, 0, .07);
+}
+
+.banya-addon-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, .6);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: banya-modal-in .15s ease;
+}
+@keyframes banya-modal-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.banya-addon-modal {
+  background: var(--warm-bg);
+  color: var(--warm-text);
+  max-width: 720px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+  position: relative;
+  border: 1px solid var(--warm-text);
+}
+.banya-addon-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: transparent;
+  border: 1px solid currentColor;
+  color: inherit;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+}
+.banya-addon-modal__close:hover {
+  background: rgba(0, 0, 0, .06);
+}
+.banya-addon-modal__title {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(28px, 4vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 0 40px 0 0;
+}
+.banya-addon-modal__visual {
+  aspect-ratio: 16 / 9;
+  background: rgba(0, 0, 0, .08);
+  border: 1px dashed var(--warm-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  opacity: .7;
+  margin: 24px 0;
+}
+.banya-addon-modal__text {
+  font-family: var(--font-serif), serif;
+  font-size: 18px;
+  line-height: 1.55;
+}
+.banya-addon-modal__text a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .banya-addon-modal { padding: 28px 20px; }
+  .banya-addon-modal__title { margin-right: 36px; }
+}
+
 @media (max-width: 520px) {
   .wrap { padding: 0 20px; }
   footer.site-footer .grid { grid-template-columns: 1fr; }
