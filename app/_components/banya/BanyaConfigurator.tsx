@@ -11,23 +11,61 @@ const ADDON_LABELS: Record<string, string> = {
   tactile: "работа с телом после пара",
 };
 
-const PROGRAM_PRESETS: Record<string, string[]> = {
-  klassika: ["venik", "tea"],
-  vosstanovlenie: ["scrub", "tactile", "tea"],
-  sensornaya: ["aroma", "sound"],
-  v_4_ruki: ["tactile"],
-  polny_relaks: ["venik", "scrub", "aroma", "sound", "tea", "tactile"],
-  kompaniya: [],
+const ADDON_TOOLTIPS: Record<string, string> = {
+  venik: "Берёза, дуб, эвкалипт, хвоя. Выбираем заранее или на месте.",
+  scrub: "Соль или кофе. На прогретой коже эффект иной.",
+  aroma: "Эфирные масла на камни — пар приобретает характер.",
+  sound: "Поющие чаши в паузах между заходами.",
+  tea: "Сборы своего приготовления — согревающие или восстанавливающие.",
+  tactile:
+    "Тактильное восстановление руками мастера. Не массаж — отдельное ремесло.",
 };
 
-const PROGRAM_LABELS: Record<string, string> = {
-  klassika: "Классика",
-  vosstanovlenie: "Восстановление",
-  sensornaya: "Сенсорная",
-  v_4_ruki: "В четыре руки",
-  polny_relaks: "Полный релакс",
-  kompaniya: "Компания",
+type Program = {
+  key: string;
+  name: string;
+  desc: string;
+  composition: string[];
 };
+
+const PROGRAMS: Program[] = [
+  {
+    key: "klassika",
+    name: "Знакомство",
+    desc: "Базовое парение и чай. Для тех, кто пришёл попробовать или просто парится без сложностей.",
+    composition: ["venik", "tea"],
+  },
+  {
+    key: "vosstanovlenie",
+    name: "Восстановление",
+    desc: "Глубокая работа с телом после пара, скрабирование, веник, чай. После долгой недели, тренировки или дороги.",
+    composition: ["scrub", "tactile", "tea"],
+  },
+  {
+    key: "sensornaya",
+    name: "Сенсорная",
+    desc: "К парению добавляются ароматерапия и поющие чаши. Меньше про тело, больше про ощущение в целом.",
+    composition: ["aroma", "sound"],
+  },
+  {
+    key: "v_4_ruki",
+    name: "Глубоко",
+    desc: "Два мастера работают одновременно. Эффект существенно глубже, чем работа поодиночке.",
+    composition: ["tactile"],
+  },
+  {
+    key: "polny_relaks",
+    name: "Не торопиться",
+    desc: "Все допники в одном вечере. Долго, медленно, без торопливости. От двух часов и больше.",
+    composition: ["venik", "scrub", "aroma", "sound", "tea", "tactile"],
+  },
+  {
+    key: "kompaniya",
+    name: "Компанией",
+    desc: "До пятнадцати человек, базовое парение и опции под группу. Для дня рождения или сборов компанией.",
+    composition: [],
+  },
+];
 
 export const BANYA_APPLY_EVENT = "banya:apply";
 
@@ -37,9 +75,26 @@ export type BanyaApplyDetail = {
 };
 
 export function BanyaConfigurator() {
+  const [program, setProgram] = useState<string>("");
   const [people, setPeople] = useState(1);
   const [addons, setAddons] = useState<string[]>([]);
-  const [program, setProgram] = useState<string>("");
+  const [openTooltip, setOpenTooltip] = useState<string | null>(null);
+
+  function selectProgram(key: string) {
+    if (program === key) {
+      setProgram("");
+      return;
+    }
+    const p = PROGRAMS.find((x) => x.key === key);
+    if (!p) return;
+    setProgram(key);
+    setAddons(p.composition);
+  }
+
+  function selectCustom() {
+    setProgram("");
+    setAddons([]);
+  }
 
   function toggleAddon(key: string) {
     setAddons((prev) =>
@@ -47,23 +102,19 @@ export function BanyaConfigurator() {
     );
   }
 
-  function pickProgram(key: string) {
-    setProgram(key);
-    if (key && PROGRAM_PRESETS[key]) {
-      setAddons(PROGRAM_PRESETS[key]);
-    }
-  }
-
   function changePeople(delta: number) {
     setPeople((p) => Math.max(1, Math.min(15, p + delta)));
+  }
+
+  function toggleTooltip(key: string) {
+    setOpenTooltip((cur) => (cur === key ? null : key));
   }
 
   function buildSummary(): string {
     const parts: string[] = ["Парение"];
     parts.push(`${people} ${peopleWord(people)}`);
-    if (program && PROGRAM_LABELS[program]) {
-      parts.push(`программа: ${PROGRAM_LABELS[program]}`);
-    }
+    const prog = PROGRAMS.find((p) => p.key === program);
+    if (prog) parts.push(`программа: ${prog.name}`);
     for (const k of addons) {
       if (ADDON_LABELS[k]) parts.push(ADDON_LABELS[k]);
     }
@@ -107,8 +158,49 @@ export function BanyaConfigurator() {
         </p>
 
         <div className="banya-config">
-          <div className="banya-config__row">
-            <span className="banya-config__label">Количество человек</span>
+          <div className="banya-config__step">
+            <div className="banya-config__step-label">
+              Шаг 1. С чего начнём?
+            </div>
+            <div className="banya-config__programs">
+              {PROGRAMS.map((p) => (
+                <button
+                  key={p.key}
+                  type="button"
+                  className={`banya-config__program-card${program === p.key ? " is-active" : ""}`}
+                  aria-pressed={program === p.key}
+                  onClick={() => selectProgram(p.key)}
+                >
+                  <span className="banya-config__program-title">{p.name}</span>
+                  <span className="banya-config__program-desc">{p.desc}</span>
+                  <span className="banya-config__program-composition">
+                    {p.composition.length
+                      ? p.composition.map((k) => ADDON_LABELS[k]).join(" · ")
+                      : "Базовое парение"}
+                  </span>
+                </button>
+              ))}
+              <button
+                type="button"
+                className={`banya-config__program-card is-custom${program === "" ? " is-active" : ""}`}
+                aria-pressed={program === ""}
+                onClick={selectCustom}
+              >
+                <span className="banya-config__program-title">
+                  Собрать самому
+                </span>
+                <span className="banya-config__program-desc">
+                  Если ни одна из программ не подходит — настройте состав с
+                  нуля.
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div className="banya-config__step">
+            <div className="banya-config__step-label">
+              Шаг 2. Количество человек
+            </div>
             <div className="banya-config__counter">
               <button
                 type="button"
@@ -128,43 +220,37 @@ export function BanyaConfigurator() {
             </div>
           </div>
 
-          <div className="banya-config__row banya-config__row--col">
-            <span className="banya-config__label">Программа (опционально)</span>
-            <div className="banya-config__chips">
-              <button
-                type="button"
-                className={`banya-config__chip${program === "" ? " is-active" : ""}`}
-                onClick={() => {
-                  setProgram("");
-                }}
-              >
-                Без программы
-              </button>
-              {Object.entries(PROGRAM_LABELS).map(([key, label]) => (
-                <button
-                  key={key}
-                  type="button"
-                  className={`banya-config__chip${program === key ? " is-active" : ""}`}
-                  onClick={() => pickProgram(key)}
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="banya-config__row banya-config__row--col">
-            <span className="banya-config__label">Допники</span>
+          <div className="banya-config__step">
+            <div className="banya-config__step-label">Шаг 3. Допники</div>
+            <p className="banya-config__hint">
+              Если выбрана программа — допники подсвечены по её составу. Можно
+              добавить или убрать.
+            </p>
             <div className="banya-config__chips">
               {Object.entries(ADDON_LABELS).map(([key, label]) => (
-                <button
-                  key={key}
-                  type="button"
-                  className={`banya-config__chip${addons.includes(key) ? " is-active" : ""}`}
-                  onClick={() => toggleAddon(key)}
-                >
-                  {label}
-                </button>
+                <div key={key} className="banya-config__addon">
+                  <button
+                    type="button"
+                    className={`banya-config__chip${addons.includes(key) ? " is-active" : ""}`}
+                    onClick={() => toggleAddon(key)}
+                  >
+                    {label}
+                  </button>
+                  <button
+                    type="button"
+                    className="banya-config__addon-info"
+                    aria-label={`Подробнее: ${label}`}
+                    onClick={() => toggleTooltip(key)}
+                  >
+                    ⓘ
+                  </button>
+                  <span
+                    className={`banya-config__addon-tooltip${openTooltip === key ? " is-open" : ""}`}
+                    role="tooltip"
+                  >
+                    {ADDON_TOOLTIPS[key]}
+                  </span>
+                </div>
               ))}
             </div>
           </div>

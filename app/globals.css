@@ -1271,27 +1271,82 @@ footer.site-footer .social span {
   padding: 32px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 32px;
   max-width: 720px;
 }
-.banya-config__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+.banya-config__step-label {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  opacity: .65;
+  margin-bottom: 14px;
 }
-.banya-config__row--col {
-  flex-direction: column;
-  align-items: flex-start;
+.banya-config__hint {
+  font-family: var(--font-sans), sans-serif;
+  font-style: italic;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: .7;
+  margin: 0 0 14px;
+  max-width: 56ch;
+}
+
+/* шаг 1 — карточки программ */
+.banya-config__programs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 12px;
 }
-.banya-config__label {
-  font-family: var(--font-sans), sans-serif;
-  font-size: 12px;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  opacity: .7;
+.banya-config__program-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 18px 16px;
+  border: 1px solid var(--warm-text);
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: background .15s, border-color .15s, color .15s;
 }
+.banya-config__program-card:hover { background: rgba(0, 0, 0, .05); }
+.banya-config__program-card.is-active {
+  background: var(--warm-deep);
+  border-color: var(--warm-deep);
+  color: var(--warm-bg);
+}
+.banya-config__program-card.is-custom {
+  border-style: dashed;
+  background: transparent;
+}
+.banya-config__program-card.is-custom.is-active {
+  background: var(--warm-text);
+  border-color: var(--warm-text);
+  color: var(--warm-bg);
+}
+.banya-config__program-title {
+  font-family: var(--font-serif), serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.15;
+}
+.banya-config__program-desc {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  line-height: 1.45;
+  opacity: .85;
+}
+.banya-config__program-composition {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 11px;
+  letter-spacing: .04em;
+  opacity: .6;
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+/* шаг 2 — счётчик */
 .banya-config__counter {
   display: flex;
   align-items: center;
@@ -1318,10 +1373,18 @@ footer.site-footer .social span {
   min-width: 2ch;
   text-align: center;
 }
+
+/* шаг 3 — допники с info-tooltip */
 .banya-config__chips {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+}
+.banya-config__addon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
 }
 .banya-config__chip {
   font-family: var(--font-sans), sans-serif;
@@ -1339,6 +1402,47 @@ footer.site-footer .social span {
   background: currentColor;
   color: var(--warm-bg);
 }
+.banya-config__addon-info {
+  width: 22px;
+  height: 22px;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: .55;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  transition: opacity .15s;
+}
+.banya-config__addon-info:hover { opacity: 1; }
+.banya-config__addon-tooltip {
+  position: absolute;
+  bottom: calc(100% + 8px);
+  left: 0;
+  width: 240px;
+  max-width: 70vw;
+  background: var(--warm-text);
+  color: var(--warm-bg);
+  padding: 10px 12px;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .15s;
+  z-index: 5;
+}
+.banya-config__addon:hover .banya-config__addon-tooltip,
+.banya-config__addon-tooltip.is-open {
+  opacity: 1;
+}
+
+/* сводка и сабмит */
 .banya-config__summary {
   border-top: 1px solid currentColor;
   padding-top: 20px;
@@ -1362,12 +1466,11 @@ footer.site-footer .social span {
   align-self: flex-start;
 }
 
+@media (max-width: 880px) {
+  .banya-config__programs { grid-template-columns: 1fr; }
+}
 @media (max-width: 520px) {
   .banya-config { padding: 24px 20px; }
-  .banya-config__row {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 }
 
 @media (max-width: 520px) {
