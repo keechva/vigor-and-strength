@@ -101,6 +101,11 @@ export function BanyaConfigurator() {
           Соберите вечер
         </h2>
 
+        <p className="banya-config-note">
+          Прайса как такового нет — слишком много переменных. Соберите состав
+          ниже, и мы назовём вилку.
+        </p>
+
         <div className="banya-config">
           <div className="banya-config__row">
             <span className="banya-config__label">Количество человек</span>

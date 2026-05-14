@@ -7,10 +7,19 @@ export function BanyaHero() {
             <a href="/">Главная</a> / Баня
           </div>
           <h1>Баня</h1>
-          <p className="lead">
-            Дровяная парная, веник, чай. Парим у вас, в партнёрских банях,
-            скоро в своей. До пятнадцати человек, при желании — в четыре руки.
-          </p>
+
+          <div className="banya-hero-tags">
+            Парная <span>·</span> Веник <span>·</span> Чай
+          </div>
+
+          <div className="banya-hero-lead">
+            <p>Работаем по Оренбургу и области.</p>
+            <p>До пятнадцати человек, при желании — в четыре руки.</p>
+          </div>
+
+          <a className="banya-hero-cta" href="#configurator">
+            Собрать вечер&nbsp;→
+          </a>
         </div>
       </div>
     </section>

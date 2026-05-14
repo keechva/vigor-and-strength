@@ -28,7 +28,16 @@
 }
 
 * { box-sizing: border-box; }
-html, body { margin: 0; padding: 0; }
+html {
+  margin: 0;
+  padding: 0;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+body { margin: 0; padding: 0; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
 
 body {
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
@@ -976,37 +985,151 @@ footer.site-footer .social span {
   letter-spacing: .16em;
 }
 
-/* ============ BANYA INTRO GRID ============ */
-.banya-intro-grid {
+/* ============ BANYA PAGE — HERO / INTRO ============ */
+
+/* hero — теги, лид, CTA */
+.banya-hero-tags {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(28px, 3.4vw, 52px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0 0 28px;
+  color: var(--neutral-fg);
+}
+.banya-hero-tags span {
+  margin: 0 .4em;
+  color: #7a7468;
+}
+.banya-hero-lead {
   display: flex;
   flex-direction: column;
-  gap: 56px;
+  gap: 6px;
+  margin: 0 0 36px;
 }
-.banya-intro-row {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 64px;
-  align-items: start;
-}
-.banya-intro-row .kicker {
+.banya-hero-lead p {
   font-family: var(--font-sans), sans-serif;
-  font-size: 14px;
-  line-height: 1.6;
-  opacity: .7;
-  text-transform: uppercase;
-  letter-spacing: .16em;
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.5;
   margin: 0;
+  color: #cdc4b3;
 }
-.banya-intro-row p:not(.kicker) {
+.banya-hero-cta {
+  display: inline-block;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  letter-spacing: .04em;
+  padding: 16px 32px;
+  text-decoration: none;
+  background: var(--warm-bg);
+  color: var(--warm-text);
+  border: 1px solid var(--warm-bg);
+  transition: background .15s, border-color .15s;
+}
+.banya-hero-cta:hover {
+  background: var(--warm-deep);
+  border-color: var(--warm-deep);
+}
+
+/* intro — два блока разной формы */
+.banya-intro {
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+}
+.banya-intro-manifesto {
+  text-align: center;
+  max-width: 62ch;
+  margin: 0 auto;
+}
+.banya-intro-manifesto h3 {
   font-family: var(--font-serif), serif;
-  font-size: clamp(19px, 1.4vw, 22px);
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0 0 28px;
+}
+.banya-intro-manifesto p {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(20px, 1.6vw, 26px);
   line-height: 1.55;
   margin: 0;
+}
+.banya-intro-divider {
+  width: 64px;
+  height: 1px;
+  background: var(--warm-text);
+  opacity: .35;
+  margin: 0 auto;
+}
+.banya-formats h3 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(28px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+  margin: 0 0 36px;
+}
+.banya-formats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.banya-format-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 28px 24px;
+  border: 1px solid var(--warm-text);
+  background: rgba(0, 0, 0, .03);
+}
+.banya-format-icon {
+  font-size: 28px;
+  line-height: 1;
+  color: var(--warm-deep);
+}
+.banya-format-card h4 {
+  font-family: var(--font-serif), serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.15;
+  margin: 0;
+}
+.banya-format-card p {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: .85;
+  margin: 0;
+}
+.banya-formats-note {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: .7;
+  margin: 28px 0 0;
   max-width: 60ch;
 }
+
+/* configurator — плашка про цену */
+.banya-config-note {
+  font-family: var(--font-sans), sans-serif;
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  opacity: .7;
+  max-width: 52ch;
+  margin: 0 0 28px;
+}
+
 @media (max-width: 880px) {
-  .banya-intro-grid { gap: 36px; }
-  .banya-intro-row { grid-template-columns: 1fr; gap: 12px; }
+  .banya-intro { gap: 56px; }
+  .banya-formats-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .banya-hero-tags { font-size: clamp(24px, 7vw, 36px); }
+  .banya-hero-cta { display: block; text-align: center; }
 }
 
 .cards {
