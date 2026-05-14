@@ -5,7 +5,9 @@ import { BanyaPricingNote } from "../_components/banya/BanyaPricingNote";
 import { BanyaBaseSteam } from "../_components/banya/BanyaBaseSteam";
 import { BanyaAddons } from "../_components/banya/BanyaAddons";
 import { BanyaPrograms } from "../_components/banya/BanyaPrograms";
+import { BanyaConfigurator } from "../_components/banya/BanyaConfigurator";
 import { BanyaCrossLinks } from "../_components/banya/BanyaCrossLinks";
+import { BanyaContact } from "../_components/banya/BanyaContact";
 import { Masters } from "../_components/Masters";
 import { Footer } from "../_components/Footer";
 
@@ -25,6 +27,7 @@ export default function BanyaPage() {
       <BanyaBaseSteam />
       <BanyaAddons />
       <BanyaPrograms />
+      <BanyaConfigurator />
       <Masters
         title="Мастера"
         filterDirection="banya"
@@ -33,6 +36,8 @@ export default function BanyaPage() {
       />
       <div className="bridge-warm-to-cool" aria-hidden="true" />
       <BanyaCrossLinks />
+      <div className="bridge-cool-to-neutral" aria-hidden="true" />
+      <BanyaContact />
       <div className="bridge-cool-to-darkneutral" aria-hidden="true" />
       <Footer />
     </main>
