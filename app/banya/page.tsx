@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { BanyaHero } from "../_components/banya/BanyaHero";
 import { BanyaIntro } from "../_components/banya/BanyaIntro";
-import { BanyaPricingNote } from "../_components/banya/BanyaPricingNote";
-import { BanyaBaseSteam } from "../_components/banya/BanyaBaseSteam";
 import { BanyaAddons } from "../_components/banya/BanyaAddons";
 import { BanyaPrograms } from "../_components/banya/BanyaPrograms";
 import { BanyaConfigurator } from "../_components/banya/BanyaConfigurator";
@@ -23,8 +21,6 @@ export default function BanyaPage() {
       <BanyaHero />
       <div className="bridge-warm-in" aria-hidden="true" />
       <BanyaIntro />
-      <BanyaPricingNote />
-      <BanyaBaseSteam />
       <BanyaAddons />
       <BanyaPrograms />
       <BanyaConfigurator />

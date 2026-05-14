@@ -976,6 +976,39 @@ footer.site-footer .social span {
   letter-spacing: .16em;
 }
 
+/* ============ BANYA INTRO GRID ============ */
+.banya-intro-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 56px;
+}
+.banya-intro-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: start;
+}
+.banya-intro-row .kicker {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: .7;
+  text-transform: uppercase;
+  letter-spacing: .16em;
+  margin: 0;
+}
+.banya-intro-row p:not(.kicker) {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(19px, 1.4vw, 22px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 60ch;
+}
+@media (max-width: 880px) {
+  .banya-intro-grid { gap: 36px; }
+  .banya-intro-row { grid-template-columns: 1fr; gap: 12px; }
+}
+
 .cards {
   display: grid;
   gap: 24px;
