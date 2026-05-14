@@ -1,36 +1,11 @@
-type Master = {
-  name: string;
-  role: string;
-  tags: string;
-  bio: string;
-};
+import { MASTERS, type Direction, type Master } from "../_lib/data/masters";
 
-const MASTERS: Master[] = [
-  {
-    name: "Дмитрий",
-    role: "Мастер",
-    tags: "Баня · Релаксология · Кунгфу",
-    bio: "[placeholder · 2–3 фразы о Дмитрии: что ведёт, как работает, какая интонация.]",
-  },
-  {
-    name: "Александр",
-    role: "Мастер",
-    tags: "Баня · Релаксология",
-    bio: "[placeholder · короткая визитка, 2–3 фразы.]",
-  },
-  {
-    name: "Вадим",
-    role: "Мастер",
-    tags: "Баня · Релаксология · Кунгфу",
-    bio: "[placeholder · короткая визитка, 2–3 фразы.]",
-  },
-  {
-    name: "Анна",
-    role: "Мастер",
-    tags: "Релаксология",
-    bio: "[placeholder · короткая визитка, 2–3 фразы.]",
-  },
-];
+type MastersProps = {
+  title?: string;
+  filterDirection?: Direction | null;
+  ctaHref?: string;
+  ctaLabel?: string;
+};
 
 function MasterCard({
   master,
@@ -47,35 +22,44 @@ function MasterCard({
       <div className="portrait" />
       <h3 className="name">{master.name}</h3>
       <div className="role">{master.role}</div>
-      <div className="tags">{master.tags}</div>
+      <div className="tags">{master.tagsDisplay}</div>
       <p className="bio">{master.bio}</p>
     </article>
   );
 }
 
-export function Masters() {
+export function Masters({
+  title = "Мастера",
+  filterDirection = null,
+  ctaHref = "/masters",
+  ctaLabel = "Все мастера →",
+}: MastersProps = {}) {
+  const list = filterDirection
+    ? MASTERS.filter((m) => m.directions.includes(filterDirection))
+    : MASTERS;
+
   return (
-    <section className="zone warm" id="masters" aria-label="Мастера">
+    <section className="zone warm" id="masters" aria-label={title}>
       <div className="wrap" style={{ position: "relative" }}>
         <div className="masters-cold-dot" aria-hidden="true" />
 
         <div className="masters-head">
           <div>
             <div className="meta">Команда</div>
-            <h2>Мастера</h2>
+            <h2>{title}</h2>
           </div>
-          <a className="cta" href="/masters">
-            Все мастера&nbsp;→
+          <a className="cta" href={ctaHref}>
+            {ctaLabel}
           </a>
         </div>
       </div>
 
       <div className="masters-strip" role="region" aria-label="Лента мастеров">
         <div className="masters-track">
-          {MASTERS.map((m) => (
+          {list.map((m) => (
             <MasterCard key={`a-${m.name}`} master={m} />
           ))}
-          {MASTERS.map((m) => (
+          {list.map((m) => (
             <MasterCard key={`b-${m.name}`} master={m} ariaHidden />
           ))}
         </div>
