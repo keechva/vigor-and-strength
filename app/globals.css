@@ -1272,14 +1272,20 @@ footer.site-footer .social span {
   display: flex;
   flex-direction: column;
   gap: 32px;
-  max-width: 720px;
+  max-width: 880px;
+  margin: 0 auto;
+}
+.banya-config__step {
+  border-left: 3px solid var(--warm-deep);
+  padding-left: 20px;
 }
 .banya-config__step-label {
   font-family: var(--font-sans), sans-serif;
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
   letter-spacing: .12em;
   text-transform: uppercase;
-  opacity: .65;
+  opacity: .8;
   margin-bottom: 14px;
 }
 .banya-config__hint {
@@ -1299,6 +1305,7 @@ footer.site-footer .social span {
   gap: 12px;
 }
 .banya-config__program-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -1311,6 +1318,14 @@ footer.site-footer .social span {
   transition: background .15s, border-color .15s, color .15s;
 }
 .banya-config__program-card:hover { background: rgba(0, 0, 0, .05); }
+.banya-config__program-card.is-active::after {
+  content: "✓";
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 13px;
+  line-height: 1;
+}
 .banya-config__program-card.is-active {
   background: var(--warm-deep);
   border-color: var(--warm-deep);
@@ -1399,8 +1414,13 @@ footer.site-footer .social span {
 }
 .banya-config__chip:hover { background: rgba(0, 0, 0, .06); }
 .banya-config__chip.is-active {
-  background: currentColor;
-  color: var(--warm-bg);
+  background: var(--warm-deep);
+  color: #fff;
+  border-color: var(--warm-deep);
+}
+.banya-config__chip.is-active:hover {
+  background: var(--warm-deep);
+  filter: brightness(.92);
 }
 .banya-config__addon-info {
   width: 22px;
@@ -1445,7 +1465,8 @@ footer.site-footer .social span {
 /* сводка и сабмит */
 .banya-config__summary {
   border-top: 1px solid currentColor;
-  padding-top: 20px;
+  padding: 24px 16px 16px;
+  background: rgba(184, 138, 74, .08);
   display: flex;
   flex-direction: column;
   gap: 8px;
