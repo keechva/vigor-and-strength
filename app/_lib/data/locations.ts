@@ -18,6 +18,15 @@ export type Location = {
   directions: Direction[];
   masters: string[];
   amenities: string[];
+  mapEmbedUrl?: string;
+  social?: {
+    vk?: string;
+    telegram?: string;
+    instagram?: string;
+    yandex?: string;
+    twogis?: string;
+    website?: string;
+  };
 };
 
 export const LOCATIONS: Location[] = [
@@ -30,7 +39,7 @@ export const LOCATIONS: Location[] = [
     shortDescription: "Своя локация в разработке. Откроемся скоро.",
     fullDescription:
       "Готовим к открытию пространство, в котором будут жить все наши направления. Дровяная парная, комната отдыха с большим столом, отдельная зона для работы с телом и тренировочный зал. Анонсируем дату открытия, когда всё будет готово.",
-    directions: ["banya", "relax", "training"],
+    directions: ["banya", "relax", "trainings"],
     masters: [],
     amenities: [],
   },
@@ -61,6 +70,14 @@ export const LOCATIONS: Location[] = [
       "Караоке",
       "Чай",
     ],
+    mapEmbedUrl:
+      "https://yandex.ru/map-widget/v1/?text=Оренбург+ул.+Базовая+23к1&z=16",
+    social: {
+      yandex: "https://yandex.ru/maps/org/lukomorye/1051887833/",
+      twogis: "https://2gis.ru/orenburg/firm/70000001034987541",
+      vk: "https://vk.com/lukomorie_orenburg",
+      telegram: "https://t.me/lukomorie_orenburg",
+    },
   },
   {
     slug: "kitusya",
@@ -84,6 +101,12 @@ export const LOCATIONS: Location[] = [
       "Комната отдыха",
       "Зона для работы с телом",
     ],
+    mapEmbedUrl:
+      "https://yandex.ru/map-widget/v1/?text=Оренбург+ул.+Ваана-Теряна+38&z=16",
+    social: {
+      yandex: "https://yandex.ru/maps/?text=Оренбург+Китуся+сауна",
+      twogis: "https://2gis.ru/orenburg/firm/kitusya",
+    },
   },
   {
     slug: "oazis-otdyha",
@@ -106,6 +129,13 @@ export const LOCATIONS: Location[] = [
       "Зона для компаний",
       "Мангал",
     ],
+    mapEmbedUrl:
+      "https://yandex.ru/map-widget/v1/?text=Оренбург+ул.+Полевая+23/1&z=16",
+    social: {
+      yandex: "https://yandex.ru/maps/org/oazis_otdykha/61012996444/",
+      twogis: "https://2gis.ru/orenburg/firm/oazis_otdyha",
+      website: "https://oazis-otdyha-orenburg.ru",
+    },
   },
 ];
 

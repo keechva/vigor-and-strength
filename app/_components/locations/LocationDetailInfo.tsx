@@ -1,6 +1,21 @@
 import type { Location } from "@/app/_lib/data/locations";
 
+const SOCIAL_LABELS: {
+  key: keyof NonNullable<Location["social"]>;
+  label: string;
+}[] = [
+  { key: "yandex", label: "Яндекс Карты" },
+  { key: "twogis", label: "2ГИС" },
+  { key: "vk", label: "VK" },
+  { key: "telegram", label: "Telegram" },
+  { key: "instagram", label: "Instagram" },
+  { key: "website", label: "Сайт" },
+];
+
 export function LocationDetailInfo({ location }: { location: Location }) {
+  const social = location.social;
+  const hasSocial = !!social && SOCIAL_LABELS.some((s) => !!social[s.key]);
+
   return (
     <section className="zone cool" aria-label="Описание">
       <div className="wrap">
@@ -34,6 +49,46 @@ export function LocationDetailInfo({ location }: { location: Location }) {
               ))}
             </ul>
           </>
+        )}
+
+        <div className="location-info__map">
+          <h3>Как добраться</h3>
+          {location.mapEmbedUrl ? (
+            <div className="location-info__map-frame">
+              <iframe
+                src={location.mapEmbedUrl}
+                width="100%"
+                height="400"
+                frameBorder={0}
+                allow="fullscreen"
+                loading="lazy"
+                title={`Карта: ${location.name}`}
+              />
+            </div>
+          ) : (
+            <p className="location-info__map-placeholder">
+              Точный адрес уточняется. Откроемся в&nbsp;[адрес&nbsp;— placeholder].
+            </p>
+          )}
+        </div>
+
+        {hasSocial && social && (
+          <div className="location-info__social">
+            <h3>Где ещё посмотреть</h3>
+            <ul className="location-info__social-list">
+              {SOCIAL_LABELS.map(({ key, label }) => {
+                const href = social[key];
+                if (!href) return null;
+                return (
+                  <li key={key}>
+                    <a href={href} target="_blank" rel="noopener noreferrer">
+                      {label}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         )}
       </div>
     </section>

@@ -1,4 +1,4 @@
-export type Direction = "banya" | "relax" | "training";
+export type Direction = "banya" | "relax" | "trainings";
 
 export type Master = {
   name: string;
@@ -12,7 +12,7 @@ export const MASTERS: Master[] = [
   {
     name: "Дмитрий",
     role: "Мастер",
-    directions: ["banya", "relax", "training"],
+    directions: ["banya", "relax", "trainings"],
     tagsDisplay: "Баня · Релаксология · Кунгфу",
     bio: "[placeholder · 2–3 фразы о Дмитрии: что ведёт, как работает, какая интонация.]",
   },
@@ -26,7 +26,7 @@ export const MASTERS: Master[] = [
   {
     name: "Вадим",
     role: "Мастер",
-    directions: ["banya", "relax", "training"],
+    directions: ["banya", "relax", "trainings"],
     tagsDisplay: "Баня · Релаксология · Кунгфу",
     bio: "[placeholder · короткая визитка, 2–3 фразы.]",
   },

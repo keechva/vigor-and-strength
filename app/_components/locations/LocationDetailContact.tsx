@@ -6,7 +6,7 @@ import type { Location } from "@/app/_lib/data/locations";
 const DIRECTION_LABELS: Record<string, string> = {
   banya: "Баня",
   relax: "Релаксология",
-  training: "Тренировки",
+  trainings: "Тренировки",
 };
 
 export function LocationDetailContact({ location }: { location: Location }) {

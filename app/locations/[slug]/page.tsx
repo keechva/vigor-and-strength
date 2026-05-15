@@ -4,7 +4,6 @@ import { LOCATIONS, getLocationBySlug } from "@/app/_lib/data/locations";
 import { LocationDetailHero } from "@/app/_components/locations/LocationDetailHero";
 import { LocationDetailInfo } from "@/app/_components/locations/LocationDetailInfo";
 import { LocationDetailDirections } from "@/app/_components/locations/LocationDetailDirections";
-import { LocationDetailMasters } from "@/app/_components/locations/LocationDetailMasters";
 import { LocationDetailContact } from "@/app/_components/locations/LocationDetailContact";
 import { LocationDetailCrossLinks } from "@/app/_components/locations/LocationDetailCrossLinks";
 import { Footer } from "@/app/_components/Footer";
@@ -35,7 +34,6 @@ export default function LocationPage({ params }: Props) {
       <LocationDetailInfo location={location} />
       <div className="bridge-cool-to-warm" aria-hidden="true" />
       <LocationDetailDirections location={location} />
-      <LocationDetailMasters location={location} />
       <LocationDetailContact location={location} />
       <LocationDetailCrossLinks />
       <Footer />
