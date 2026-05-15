@@ -7,7 +7,7 @@ const LINKS = [
   { href: "/#relax", label: "Релаксология" },
   { href: "/#training", label: "Тренировки" },
   { href: "/#masters", label: "Мастера" },
-  { href: "/#locations", label: "Локации" },
+  { href: "/locations", label: "Локации" },
   { href: "/#contact", label: "Связаться" },
 ];
 

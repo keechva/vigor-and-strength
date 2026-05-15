@@ -3,6 +3,7 @@ import { MASTERS, type Direction, type Master } from "../_lib/data/masters";
 type MastersProps = {
   title?: string;
   filterDirection?: Direction | null;
+  filterByNames?: string[] | null;
   ctaHref?: string;
   ctaLabel?: string;
 };
@@ -31,12 +32,19 @@ function MasterCard({
 export function Masters({
   title = "Мастера",
   filterDirection = null,
+  filterByNames = null,
   ctaHref = "/masters",
   ctaLabel = "Все мастера →",
 }: MastersProps = {}) {
-  const list = filterDirection
-    ? MASTERS.filter((m) => m.directions.includes(filterDirection))
-    : MASTERS;
+  let list = MASTERS;
+  if (filterDirection) {
+    list = list.filter((m) => m.directions.includes(filterDirection));
+  }
+  if (filterByNames && filterByNames.length > 0) {
+    list = list.filter((m) => filterByNames.includes(m.name));
+  }
+
+  const showCta = ctaLabel !== "" && ctaHref !== "";
 
   return (
     <section className="zone warm" id="masters" aria-label={title}>
@@ -48,9 +56,11 @@ export function Masters({
             <div className="meta">Команда</div>
             <h2>{title}</h2>
           </div>
-          <a className="cta" href={ctaHref}>
-            {ctaLabel}
-          </a>
+          {showCta && (
+            <a className="cta" href={ctaHref}>
+              {ctaLabel}
+            </a>
+          )}
         </div>
       </div>
 
