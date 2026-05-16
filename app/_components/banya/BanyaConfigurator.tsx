@@ -75,6 +75,9 @@ export const BANYA_APPLY_EVENT = "banya:apply";
 export type BanyaApplyDetail = {
   direction: "Баня";
   message: string;
+  program?: string;
+  people?: number;
+  addons?: string[];
 };
 
 export function BanyaConfigurator() {
@@ -128,6 +131,9 @@ export function BanyaConfigurator() {
     const detail: BanyaApplyDetail = {
       direction: "Баня",
       message: buildSummary(),
+      program: program || undefined,
+      people,
+      addons: addons.length > 0 ? addons : undefined,
     };
     window.dispatchEvent(new CustomEvent(BANYA_APPLY_EVENT, { detail }));
     const target = document.getElementById("contact");

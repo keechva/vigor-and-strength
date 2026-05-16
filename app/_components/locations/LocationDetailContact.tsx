@@ -1,7 +1,8 @@
 "use client";
 
-import { type FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 import type { Location } from "@/app/_lib/data/locations";
+import { sendLead } from "@/app/_lib/sendLead";
 
 const DIRECTION_LABELS: Record<string, string> = {
   banya: "Баня",
@@ -10,11 +11,43 @@ const DIRECTION_LABELS: Record<string, string> = {
 };
 
 export function LocationDetailContact({ location }: { location: Location }) {
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    console.log("Заявка /locations:", data);
-    alert("Заявка отправлена (демо)");
+    setIsSubmitting(true);
+    setResult("idle");
+    setErrorMessage(undefined);
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const directionRaw = String(fd.get("direction") ?? "");
+    const masterRaw = String(fd.get("master") ?? "");
+
+    const res = await sendLead({
+      name: String(fd.get("name") ?? "").trim(),
+      phone: String(fd.get("phone") ?? "").trim(),
+      source: `location/${location.slug}`,
+      location: location.slug,
+      direction:
+        directionRaw && directionRaw !== "Не определился"
+          ? directionRaw
+          : undefined,
+      master:
+        masterRaw && masterRaw !== "Не определился" ? masterRaw : undefined,
+      message: String(fd.get("message") ?? "").trim() || undefined,
+    });
+
+    if (res.ok) {
+      setResult("success");
+      form.reset();
+    } else {
+      setResult("error");
+      setErrorMessage(res.error);
+    }
+    setIsSubmitting(false);
   }
 
   return (
@@ -92,14 +125,26 @@ export function LocationDetailContact({ location }: { location: Location }) {
             </label>
 
             <div className="submit-row">
-              <button className="cta" type="submit">
-                Оставить заявку&nbsp;→
+              <button className="cta" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Отправляем…" : "Оставить заявку →"}
               </button>
               <div className="terms">
                 Нажимая «Оставить заявку», вы&nbsp;соглашаетесь с&nbsp;обработкой
                 персональных данных.
               </div>
             </div>
+
+            {result === "success" && (
+              <p className="form-result form-result--ok">
+                Заявка принята. Перезвоним в&nbsp;ближайшее время.
+              </p>
+            )}
+            {result === "error" && (
+              <p className="form-result form-result--error">
+                {errorMessage ||
+                  "Что-то пошло не так. Попробуйте ещё раз или напишите в Telegram."}
+              </p>
+            )}
           </form>
         </div>
       </div>

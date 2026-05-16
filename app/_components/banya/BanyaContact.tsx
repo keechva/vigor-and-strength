@@ -1,14 +1,24 @@
 "use client";
 
-import { type FormEvent, useEffect, useState } from "react";
+import { type FormEvent, useEffect, useRef, useState } from "react";
 import {
   BANYA_APPLY_EVENT,
   type BanyaApplyDetail,
 } from "./BanyaConfigurator";
+import { sendLead } from "@/app/_lib/sendLead";
 
 export function BanyaContact() {
   const [message, setMessage] = useState("");
   const [direction, setDirection] = useState("Баня");
+  const [program, setProgram] = useState<string | undefined>(undefined);
+  const [people, setPeople] = useState<number | undefined>(undefined);
+  const [addons, setAddons] = useState<string[] | undefined>(undefined);
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+  const formRef = useRef<HTMLFormElement | null>(null);
 
   useEffect(() => {
     function onApply(e: Event) {
@@ -16,14 +26,48 @@ export function BanyaContact() {
       if (!detail) return;
       setMessage(detail.message);
       setDirection(detail.direction);
+      setProgram(detail.program);
+      setPeople(detail.people);
+      setAddons(detail.addons);
     }
     window.addEventListener(BANYA_APPLY_EVENT, onApply);
     return () => window.removeEventListener(BANYA_APPLY_EVENT, onApply);
   }, []);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    alert("Заявка отправлена (демо)");
+    setIsSubmitting(true);
+    setResult("idle");
+    setErrorMessage(undefined);
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const name = String(fd.get("name") ?? "").trim();
+    const phone = String(fd.get("phone") ?? "").trim();
+
+    const res = await sendLead({
+      name,
+      phone,
+      source: "banya",
+      direction,
+      program,
+      people,
+      addons,
+      message: message || undefined,
+    });
+
+    if (res.ok) {
+      setResult("success");
+      form.reset();
+      setMessage("");
+      setProgram(undefined);
+      setPeople(undefined);
+      setAddons(undefined);
+    } else {
+      setResult("error");
+      setErrorMessage(res.error);
+    }
+    setIsSubmitting(false);
   }
 
   return (
@@ -38,7 +82,7 @@ export function BanyaContact() {
             </p>
           </div>
 
-          <form className="lead-form" onSubmit={onSubmit}>
+          <form ref={formRef} className="lead-form" onSubmit={onSubmit}>
             <label>
               Имя
               <input
@@ -83,14 +127,26 @@ export function BanyaContact() {
             </label>
 
             <div className="submit-row">
-              <button className="cta" type="submit">
-                Отправить заявку&nbsp;→
+              <button className="cta" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Отправляем…" : "Отправить заявку →"}
               </button>
               <div className="terms">
                 Нажимая «Отправить», вы соглашаетесь с обработкой персональных
                 данных.
               </div>
             </div>
+
+            {result === "success" && (
+              <p className="form-result form-result--ok">
+                Заявка принята. Перезвоним в&nbsp;ближайшее время.
+              </p>
+            )}
+            {result === "error" && (
+              <p className="form-result form-result--error">
+                {errorMessage ||
+                  "Что-то пошло не так. Попробуйте ещё раз или напишите в Telegram."}
+              </p>
+            )}
           </form>
         </div>
       </div>

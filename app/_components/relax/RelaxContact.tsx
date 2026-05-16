@@ -1,16 +1,43 @@
 "use client";
 
-import { type FormEvent } from "react";
+import { type FormEvent, useState } from "react";
 import { MASTERS } from "@/app/_lib/data/masters";
+import { sendLead } from "@/app/_lib/sendLead";
 
 const RELAX_MASTERS = MASTERS.filter((m) => m.directions.includes("relax"));
 
 export function RelaxContact() {
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [result, setResult] = useState<"idle" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined);
+
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    const data = Object.fromEntries(new FormData(e.currentTarget));
-    console.log("Заявка /relax:", data);
-    alert("Заявка отправлена (демо)");
+    setIsSubmitting(true);
+    setResult("idle");
+    setErrorMessage(undefined);
+
+    const form = e.currentTarget;
+    const fd = new FormData(form);
+    const masterRaw = String(fd.get("master") ?? "");
+
+    const res = await sendLead({
+      name: String(fd.get("name") ?? "").trim(),
+      phone: String(fd.get("phone") ?? "").trim(),
+      source: "relax",
+      direction: "relax",
+      master: masterRaw && masterRaw !== "Не определился" ? masterRaw : undefined,
+      message: String(fd.get("message") ?? "").trim() || undefined,
+    });
+
+    if (res.ok) {
+      setResult("success");
+      form.reset();
+    } else {
+      setResult("error");
+      setErrorMessage(res.error);
+    }
+    setIsSubmitting(false);
   }
 
   return (
@@ -65,14 +92,26 @@ export function RelaxContact() {
             </label>
 
             <div className="submit-row">
-              <button className="cta" type="submit">
-                Оставить заявку&nbsp;→
+              <button className="cta" type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Отправляем…" : "Оставить заявку →"}
               </button>
               <div className="terms">
                 Нажимая «Оставить заявку», вы соглашаетесь с обработкой
                 персональных данных.
               </div>
             </div>
+
+            {result === "success" && (
+              <p className="form-result form-result--ok">
+                Заявка принята. Перезвоним в&nbsp;ближайшее время.
+              </p>
+            )}
+            {result === "error" && (
+              <p className="form-result form-result--error">
+                {errorMessage ||
+                  "Что-то пошло не так. Попробуйте ещё раз или напишите в Telegram."}
+              </p>
+            )}
           </form>
         </div>
       </div>
