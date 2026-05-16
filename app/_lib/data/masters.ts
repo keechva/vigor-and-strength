@@ -1,5 +1,11 @@
 export type Direction = "banya" | "relax" | "trainings";
 
+export const DIRECTION_LABELS: Record<Direction, string> = {
+  banya: "Баня",
+  relax: "Релаксология",
+  trainings: "Тренировки",
+};
+
 export type DirectionDetail = {
   description: string;
   specializations: string[];
@@ -17,7 +23,6 @@ export type Master = {
   name: string;
   role: string;
   directions: Direction[];
-  tagsDisplay: string;
   bio: string;
   tagline: string;
   bioFull: string;
@@ -60,7 +65,6 @@ export const MASTERS: Master[] = [
     name: "Дмитрий",
     role: "Ведущий мастер",
     directions: ["banya", "relax", "trainings"],
-    tagsDisplay: "Баня · Релаксология · Кунгфу",
     bio: "[placeholder · 2–3 фразы о Дмитрии: что ведёт, как работает, какая интонация.]",
     tagline:
       "Веду все три направления. Парю в банях по Оренбургу, делаю работу с телом после пара, преподаю кунгфу. Основа практики в проекте.",
@@ -131,7 +135,6 @@ export const MASTERS: Master[] = [
     name: "Александр",
     role: "Мастер",
     directions: ["banya", "relax"],
-    tagsDisplay: "Баня · Релаксология",
     bio: "[placeholder · короткая визитка, 2–3 фразы.]",
     tagline: PLACEHOLDER_TAGLINE,
     bioFull: PLACEHOLDER_BIO_FULL,
@@ -170,7 +173,6 @@ export const MASTERS: Master[] = [
     name: "Вадим",
     role: "Мастер",
     directions: ["banya", "relax", "trainings"],
-    tagsDisplay: "Баня · Релаксология · Кунгфу",
     bio: "[placeholder · короткая визитка, 2–3 фразы.]",
     tagline: PLACEHOLDER_TAGLINE,
     bioFull: PLACEHOLDER_BIO_FULL,
@@ -209,13 +211,13 @@ export const MASTERS: Master[] = [
     slug: "nikita",
     name: "Никита",
     role: "Мастер",
-    directions: ["banya"],
-    tagsDisplay: "Баня",
+    directions: ["banya", "relax"],
     bio: "[placeholder · короткая визитка, 2–3 фразы.]",
     tagline: PLACEHOLDER_TAGLINE,
     bioFull: PLACEHOLDER_BIO_FULL,
     directionDetails: {
       banya: PLACEHOLDER_DIRECTION,
+      relax: PLACEHOLDER_DIRECTION,
     },
     formatsDetails: {
       travel: true,
@@ -248,7 +250,6 @@ export const MASTERS: Master[] = [
     name: "Анна",
     role: "Мастер",
     directions: ["relax"],
-    tagsDisplay: "Релаксология",
     bio: "[placeholder · короткая визитка, 2–3 фразы.]",
     tagline: PLACEHOLDER_TAGLINE,
     bioFull: PLACEHOLDER_BIO_FULL,
@@ -278,12 +279,12 @@ export const MASTERS: Master[] = [
     slug: "mariya",
     name: "Мария",
     role: "Мастер",
-    directions: ["relax"],
-    tagsDisplay: "Релаксология",
+    directions: ["banya", "relax"],
     bio: "[placeholder · короткая визитка, 2–3 фразы.]",
     tagline: PLACEHOLDER_TAGLINE,
     bioFull: PLACEHOLDER_BIO_FULL,
     directionDetails: {
+      banya: PLACEHOLDER_DIRECTION,
       relax: PLACEHOLDER_DIRECTION,
     },
     formatsDetails: {

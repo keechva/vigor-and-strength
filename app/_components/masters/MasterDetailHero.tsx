@@ -1,10 +1,4 @@
-import type { Master } from "@/app/_lib/data/masters";
-
-const DIRECTION_LABELS: Record<string, string> = {
-  banya: "Баня",
-  relax: "Релаксология",
-  trainings: "Кунгфу",
-};
+import { DIRECTION_LABELS, type Master } from "@/app/_lib/data/masters";
 
 export function MasterDetailHero({ master }: { master: Master }) {
   return (

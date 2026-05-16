@@ -11,7 +11,7 @@ const DIRECTION_INFO: Record<
     cta: "О направлении «Релаксология» →",
   },
   trainings: {
-    label: "Кунгфу",
+    label: "Тренировки",
     href: "/trainings",
     cta: "О направлении «Тренировки» →",
   },

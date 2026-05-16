@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { LOCATIONS, type Location } from "@/app/_lib/data/locations";
-
-const DIRECTION_LABELS: Record<string, string> = {
-  banya: "Баня",
-  relax: "Релаксология",
-  trainings: "Тренировки",
-};
+import { DIRECTION_LABELS } from "@/app/_lib/data/masters";
 
 function LocationCard({ location }: { location: Location }) {
   const typeLabel = location.type === "own" ? "своя" : "партнёрская";

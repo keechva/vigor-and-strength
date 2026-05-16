@@ -2,13 +2,8 @@
 
 import { type FormEvent, useState } from "react";
 import type { Location } from "@/app/_lib/data/locations";
+import { DIRECTION_LABELS } from "@/app/_lib/data/masters";
 import { sendLead } from "@/app/_lib/sendLead";
-
-const DIRECTION_LABELS: Record<string, string> = {
-  banya: "Баня",
-  relax: "Релаксология",
-  trainings: "Тренировки",
-};
 
 export function LocationDetailContact({ location }: { location: Location }) {
   const [isSubmitting, setIsSubmitting] = useState(false);

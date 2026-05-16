@@ -1,14 +1,8 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
-import type { Master } from "@/app/_lib/data/masters";
+import { DIRECTION_LABELS, type Master } from "@/app/_lib/data/masters";
 import { sendLead } from "@/app/_lib/sendLead";
-
-const DIRECTION_LABELS: Record<string, string> = {
-  banya: "Баня",
-  relax: "Релаксология",
-  trainings: "Кунгфу",
-};
 
 export function MasterDetailContact({ master }: { master: Master }) {
   const [isSubmitting, setIsSubmitting] = useState(false);

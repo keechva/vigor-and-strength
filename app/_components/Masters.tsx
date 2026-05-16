@@ -1,4 +1,4 @@
-import { MASTERS, type Direction, type Master } from "../_lib/data/masters";
+import { DIRECTION_LABELS, MASTERS, type Direction, type Master } from "../_lib/data/masters";
 
 type MastersProps = {
   title?: string;
@@ -27,7 +27,9 @@ export function MasterCard({
         </a>
       </h3>
       <div className="role">{master.role}</div>
-      <div className="tags">{master.tagsDisplay}</div>
+      <div className="tags">
+        {master.directions.map((d) => DIRECTION_LABELS[d]).join(" · ")}
+      </div>
       <p className="bio">{master.bio}</p>
     </article>
   );
