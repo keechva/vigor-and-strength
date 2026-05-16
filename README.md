@@ -66,7 +66,7 @@ npm run dev
 - [x] Баня (/banya) с конфигуратором
 - [x] Релаксология (/relax)
 - [x] Локации (/locations + /locations/[slug])
-- [ ] Тренировки (/trainings)
+- [x] Тренировки (/trainings)
 - [ ] Хаб мастеров (/masters)
 - [ ] Бэкенд формы заявки
 - [ ] Замена placeholder-данных на реальные
