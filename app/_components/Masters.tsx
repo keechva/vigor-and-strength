@@ -8,7 +8,7 @@ type MastersProps = {
   ctaLabel?: string;
 };
 
-function MasterCard({
+export function MasterCard({
   master,
   ariaHidden = false,
 }: {

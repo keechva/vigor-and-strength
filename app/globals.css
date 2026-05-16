@@ -2048,3 +2048,54 @@ footer.site-footer .social span {
 @media (max-width: 520px) {
   .trainings-hero-cta { display: block; text-align: center; }
 }
+
+/* ============ MASTERS HUB ============ */
+.masters-hub-title {
+  font-family: var(--font-serif), serif;
+  font-weight: 500;
+  font-size: clamp(40px, 6vw, 86px);
+  line-height: 1.02;
+  letter-spacing: -.01em;
+  margin: 8px 0 0;
+}
+.masters-hub-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 32px 0 48px;
+}
+.masters-hub-filter {
+  font-family: var(--font-mono), monospace;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  padding: 10px 18px;
+  border: 1px solid currentColor;
+  background: transparent;
+  cursor: pointer;
+  transition: background .15s ease, color .15s ease, border-color .15s ease;
+  color: var(--warm-text);
+}
+.masters-hub-filter:hover { background: rgba(0, 0, 0, .04); }
+.masters-hub-filter.is-active {
+  background: var(--warm-deep);
+  color: #fff;
+  border-color: var(--warm-deep);
+}
+
+.masters-hub-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px 32px;
+  padding-bottom: 24px;
+}
+.masters-hub-grid .master {
+  flex: initial;
+  width: auto;
+}
+@media (max-width: 880px) {
+  .masters-hub-grid { grid-template-columns: 1fr 1fr; gap: 32px 24px; }
+}
+@media (max-width: 560px) {
+  .masters-hub-grid { grid-template-columns: 1fr; gap: 28px; }
+}

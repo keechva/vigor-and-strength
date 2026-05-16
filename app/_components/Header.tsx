@@ -6,7 +6,7 @@ const LINKS = [
   { href: "/banya", label: "Баня" },
   { href: "/relax", label: "Релаксология" },
   { href: "/trainings", label: "Тренировки" },
-  { href: "/#masters", label: "Мастера" },
+  { href: "/masters", label: "Мастера" },
   { href: "/locations", label: "Локации" },
   { href: "/#contact", label: "Связаться" },
 ];
