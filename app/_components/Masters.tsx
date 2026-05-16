@@ -21,7 +21,11 @@ export function MasterCard({
       {...(ariaHidden ? { "aria-hidden": true } : {})}
     >
       <div className="portrait" />
-      <h3 className="name">{master.name}</h3>
+      <h3 className="name">
+        <a href={`/masters/${master.slug}`} className="master__name-link">
+          {master.name}
+        </a>
+      </h3>
       <div className="role">{master.role}</div>
       <div className="tags">{master.tagsDisplay}</div>
       <p className="bio">{master.bio}</p>

@@ -18,7 +18,9 @@ export default function HomePage() {
       <div className="bridge-cool-to-neutral" aria-hidden="true" />
       <Training />
       <div className="bridge-neutral-to-warm" aria-hidden="true" />
-      <Masters />
+      <Masters
+        filterByNames={["Дмитрий", "Александр", "Вадим", "Анна", "Мария"]}
+      />
       <div className="bridge-warm-to-cool-2" aria-hidden="true" />
       <Locations />
       <div className="bridge-cool-to-neutral" aria-hidden="true" />
