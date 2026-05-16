@@ -17,7 +17,7 @@ const DIRECTION_CARDS: Record<
   trainings: {
     title: "Тренировки",
     arrow: "В разработке, лист ожидания →",
-    href: "/training",
+    href: "/trainings",
   },
 };
 

@@ -1953,3 +1953,98 @@ footer.site-footer .social span {
 .location-info__social-list a:hover {
   text-decoration-thickness: 2px;
 }
+
+/* ============ TRAININGS PAGE ============ */
+
+/* hero — нейтральный CTA: trainings — направление в разработке, не warm и не cool */
+.trainings-hero-cta {
+  display: inline-block;
+  font-family: var(--font-sans), sans-serif;
+  font-size: 15px;
+  letter-spacing: .04em;
+  padding: 16px 32px;
+  text-decoration: none;
+  background: var(--neutral-fg);
+  color: var(--neutral-bg);
+  border: 1px solid var(--neutral-fg);
+  transition: filter .15s;
+}
+.trainings-hero-cta:hover {
+  filter: brightness(.92);
+}
+
+/* форматы кунгфу — 2 карточки, центрированы */
+.trainings-formats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+/* coach — крупная карточка ведущего: visual 4:5 + тело */
+.trainings-coach {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 56px;
+  align-items: start;
+  margin-top: 36px;
+}
+.trainings-coach__visual {
+  aspect-ratio: 4 / 5;
+  background: rgba(0, 0, 0, .08);
+  border: 1px solid var(--cool-text);
+  display: flex;
+  align-items: end;
+  justify-content: flex-start;
+  padding: 16px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  letter-spacing: .04em;
+  opacity: .75;
+}
+.trainings-coach__body h3 {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(36px, 4.5vw, 60px);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -.01em;
+  margin: 0 0 8px;
+}
+.trainings-coach__role {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 13px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  opacity: .6;
+  margin: 0 0 28px;
+}
+.trainings-coach__body p:not(.trainings-coach__role) {
+  font-family: var(--font-serif), serif;
+  font-size: clamp(18px, 1.5vw, 22px);
+  line-height: 1.55;
+  margin: 0;
+  max-width: 56ch;
+}
+
+/* roadmap — статус-метка в карточке */
+.trainings-roadmap-status {
+  display: inline-block;
+  font-family: var(--font-mono), monospace;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--warm-text);
+  opacity: .65;
+  margin: 4px 0 8px;
+  align-self: flex-start;
+}
+
+@media (max-width: 880px) {
+  .trainings-formats-grid { grid-template-columns: 1fr; }
+  .trainings-coach { grid-template-columns: 1fr; gap: 32px; }
+}
+@media (max-width: 520px) {
+  .trainings-hero-cta { display: block; text-align: center; }
+}

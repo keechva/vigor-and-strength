@@ -32,7 +32,7 @@ export function Footer() {
                 <a href="/relax">Релаксология</a>
               </li>
               <li>
-                <a href="/training">Тренировки</a>
+                <a href="/trainings">Тренировки</a>
               </li>
             </ul>
           </div>

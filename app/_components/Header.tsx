@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 
 const LINKS = [
-  { href: "/#banya", label: "Баня" },
-  { href: "/#relax", label: "Релаксология" },
-  { href: "/#training", label: "Тренировки" },
+  { href: "/banya", label: "Баня" },
+  { href: "/relax", label: "Релаксология" },
+  { href: "/trainings", label: "Тренировки" },
   { href: "/#masters", label: "Мастера" },
   { href: "/locations", label: "Локации" },
   { href: "/#contact", label: "Связаться" },
