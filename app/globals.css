@@ -1241,12 +1241,13 @@ footer.site-footer .social span {
 }
 .relax-price-note {
   font-family: var(--font-sans), sans-serif;
-  font-style: italic;
-  font-size: 15px;
-  line-height: 1.5;
-  opacity: .7;
-  max-width: 52ch;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--cool-text);
+  max-width: 56ch;
   margin: 0;
+  padding-left: 20px;
+  border-left: 3px solid var(--cool-deep);
 }
 
 /* approach — манифест в тёплой зоне */
@@ -2324,14 +2325,14 @@ footer.site-footer .social span {
   .master-formats { grid-template-columns: 1fr; }
 }
 
-/* ============ MASTER DETAIL — GALLERY ============ */
-.master-gallery {
+/* ============ GALLERY (shared: masters, relax) ============ */
+.gallery {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 18px;
   margin-top: 28px;
 }
-.master-gallery__item {
+.gallery__item {
   appearance: none;
   background: transparent;
   border: 0;
@@ -2344,7 +2345,7 @@ footer.site-footer .social span {
   flex-direction: column;
   gap: 8px;
 }
-.master-gallery__placeholder {
+.gallery__placeholder {
   aspect-ratio: 4 / 5;
   border: 1px solid currentColor;
   background:
@@ -2361,15 +2362,15 @@ footer.site-footer .social span {
   text-transform: uppercase;
   opacity: .9;
 }
-.master-gallery__kind { font-size: 11px; opacity: .65; }
-.master-gallery__alt {
+.gallery__kind { font-size: 11px; opacity: .65; }
+.gallery__alt {
   font-family: var(--font-serif), serif;
   font-size: 14px;
   letter-spacing: 0;
   text-transform: none;
   opacity: .85;
 }
-.master-gallery__caption {
+.gallery__caption {
   font-family: var(--font-mono), monospace;
   font-size: 11px;
   letter-spacing: .1em;
@@ -2378,14 +2379,14 @@ footer.site-footer .social span {
 }
 
 @media (max-width: 880px) {
-  .master-gallery { grid-template-columns: 1fr 1fr; }
+  .gallery { grid-template-columns: 1fr 1fr; }
 }
 @media (max-width: 520px) {
-  .master-gallery { grid-template-columns: 1fr; }
+  .gallery { grid-template-columns: 1fr; }
 }
 
-/* ============ MASTER DETAIL — LIGHTBOX ============ */
-.master-gallery-lightbox {
+/* ============ GALLERY LIGHTBOX ============ */
+.gallery-lightbox {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, .85);
@@ -2395,7 +2396,7 @@ footer.site-footer .social span {
   justify-content: center;
   padding: 40px;
 }
-.master-gallery-lightbox__content {
+.gallery-lightbox__content {
   max-width: 900px;
   width: 100%;
   display: flex;
@@ -2403,19 +2404,19 @@ footer.site-footer .social span {
   gap: 12px;
   color: #fff;
 }
-.master-gallery-lightbox__media {
+.gallery-lightbox__media {
   aspect-ratio: 4 / 5;
   max-height: 80vh;
   border: 1px solid rgba(255, 255, 255, .25);
   background: rgba(255, 255, 255, .05);
   display: flex;
 }
-.master-gallery-lightbox__media .master-gallery__placeholder {
+.gallery-lightbox__media .gallery__placeholder {
   flex: 1;
   border: 0;
   background: transparent;
 }
-.master-gallery-lightbox__caption {
+.gallery-lightbox__caption {
   font-family: var(--font-mono), monospace;
   font-size: 12px;
   letter-spacing: .1em;
@@ -2423,8 +2424,8 @@ footer.site-footer .social span {
   opacity: .75;
   text-align: center;
 }
-.master-gallery-lightbox__close,
-.master-gallery-lightbox__nav {
+.gallery-lightbox__close,
+.gallery-lightbox__nav {
   position: absolute;
   background: transparent;
   border: 1px solid rgba(255, 255, 255, .35);
@@ -2438,17 +2439,17 @@ footer.site-footer .social span {
   cursor: pointer;
   font-family: var(--font-sans), sans-serif;
 }
-.master-gallery-lightbox__close { top: 20px; right: 20px; }
-.master-gallery-lightbox__nav.is-prev { left: 20px; top: 50%; transform: translateY(-50%); }
-.master-gallery-lightbox__nav.is-next { right: 20px; top: 50%; transform: translateY(-50%); }
-.master-gallery-lightbox__close:hover,
-.master-gallery-lightbox__nav:hover { background: rgba(255, 255, 255, .12); }
+.gallery-lightbox__close { top: 20px; right: 20px; }
+.gallery-lightbox__nav.is-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+.gallery-lightbox__nav.is-next { right: 20px; top: 50%; transform: translateY(-50%); }
+.gallery-lightbox__close:hover,
+.gallery-lightbox__nav:hover { background: rgba(255, 255, 255, .12); }
 
 @media (max-width: 520px) {
-  .master-gallery-lightbox { padding: 16px; }
-  .master-gallery-lightbox__close { top: 12px; right: 12px; }
-  .master-gallery-lightbox__nav.is-prev { left: 8px; }
-  .master-gallery-lightbox__nav.is-next { right: 8px; }
+  .gallery-lightbox { padding: 16px; }
+  .gallery-lightbox__close { top: 12px; right: 12px; }
+  .gallery-lightbox__nav.is-prev { left: 8px; }
+  .gallery-lightbox__nav.is-next { right: 8px; }
 }
 
 /* ============ MASTER CARD NAME LINK ============ */

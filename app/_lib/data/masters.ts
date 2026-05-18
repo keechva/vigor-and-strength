@@ -11,12 +11,9 @@ export type DirectionDetail = {
   specializations: string[];
 };
 
-export type MasterGalleryItem = {
-  type: "image" | "video";
-  src: string;
-  alt: string;
-  caption?: string;
-};
+import type { GalleryItem } from "@/app/_components/Gallery";
+
+export type MasterGalleryItem = GalleryItem;
 
 export type Master = {
   slug: string;

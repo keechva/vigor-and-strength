@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { RelaxHero } from "@/app/_components/relax/RelaxHero";
 import { RelaxIntro } from "@/app/_components/relax/RelaxIntro";
 import { RelaxApproach } from "@/app/_components/relax/RelaxApproach";
+import { RelaxGallery } from "@/app/_components/relax/RelaxGallery";
 import { Masters } from "@/app/_components/Masters";
 import { RelaxCrossLinks } from "@/app/_components/relax/RelaxCrossLinks";
 import { RelaxContact } from "@/app/_components/relax/RelaxContact";
@@ -21,6 +22,9 @@ export default function RelaxPage() {
       <RelaxIntro />
       <div className="bridge-cool-to-warm" aria-hidden="true" />
       <RelaxApproach />
+      <div className="bridge-warm-to-cool" aria-hidden="true" />
+      <RelaxGallery />
+      <div className="bridge-cool-to-warm" aria-hidden="true" />
       <Masters filterDirection="relax" />
       <div className="bridge-warm-to-cool" aria-hidden="true" />
       <RelaxCrossLinks />
