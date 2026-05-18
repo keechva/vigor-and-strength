@@ -1636,12 +1636,48 @@ footer.site-footer .social span {
 /* ============ BANYA ADDONS — карточки + модалка ============ */
 
 .banya-addon-card {
+  width: 100%;
+  font: inherit;
+  color: inherit;
+  text-align: left;
   cursor: pointer;
-  transition: background .15s;
+  transition: transform .15s ease, background-color .15s ease;
 }
-.banya-addon-card:hover,
-.banya-addon-card:focus-visible {
+.banya-addon-card:hover {
   background: rgba(0, 0, 0, .07);
+  transform: translateY(-2px);
+}
+.banya-addon-card:focus-visible {
+  outline: 2px solid var(--warm-deep);
+  outline-offset: 2px;
+  background: rgba(0, 0, 0, .07);
+}
+.banya-addon-card__title {
+  font-family: var(--font-serif), serif;
+  font-size: 26px;
+  line-height: 1.15;
+  font-weight: 500;
+  margin: 6px 0 0;
+}
+.banya-addon-card__desc {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  opacity: .85;
+}
+.banya-addon-card__more {
+  margin-top: auto;
+  padding-top: 14px;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  opacity: .6;
+  transition: opacity .15s ease;
+}
+.banya-addon-card:hover .banya-addon-card__more,
+.banya-addon-card:focus-visible .banya-addon-card__more {
+  opacity: 1;
 }
 
 .banya-addon-modal-backdrop {

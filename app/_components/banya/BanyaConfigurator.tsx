@@ -29,6 +29,7 @@ type Program = {
   name: string;
   desc: string;
   composition: string[];
+  defaultPeople?: number;
 };
 
 const PROGRAMS: Program[] = [
@@ -37,24 +38,28 @@ const PROGRAMS: Program[] = [
     name: "Знакомство",
     desc: "Для тех, кто впервые. Спокойное парение и чай — без лишних слоёв, чтобы понять, как вам подходит.",
     composition: ["venik", "tea"],
+    defaultPeople: 1,
   },
   {
     key: "vosstanovlenie",
     name: "Восстановление",
     desc: "Когда тело устало и нужно его отпустить. После плотной недели, дальней дороги или тяжёлой тренировки.",
     composition: ["scrub", "tactile", "tea"],
+    defaultPeople: 1,
   },
   {
     key: "sensornaya",
     name: "Сенсорная",
     desc: "Когда хочется не телесной нагрузки, а ощущения момента. С ароматами и звуком — без интенсивной работы с телом.",
     composition: ["aroma", "sound"],
+    defaultPeople: 1,
   },
   {
     key: "intensiv",
     name: "Интенсив",
     desc: "Когда обычной бани мало. Два мастера работают одновременно — это короче по времени и глубже по эффекту.",
     composition: ["tactile", "four_hands"],
+    defaultPeople: 1,
   },
   {
     key: "polny_relaks",
@@ -67,6 +72,7 @@ const PROGRAMS: Program[] = [
     name: "Компанией",
     desc: "Для дней рождения, мальчишников, корпоративов, сборов после походов. До пятнадцати человек, программу подстраиваем под группу.",
     composition: [],
+    defaultPeople: 10,
   },
 ];
 
@@ -89,12 +95,14 @@ export function BanyaConfigurator() {
   function selectProgram(key: string) {
     if (program === key) {
       setProgram("");
+      setAddons([]);
       return;
     }
     const p = PROGRAMS.find((x) => x.key === key);
     if (!p) return;
     setProgram(key);
     setAddons(p.composition);
+    if (p.defaultPeople) setPeople(p.defaultPeople);
   }
 
   function selectCustom() {

@@ -130,24 +130,18 @@ export function BanyaAddons() {
         </h2>
         <div className="cards col-3">
           {ADDONS.map((a) => (
-            <article
+            <button
               key={a.id}
+              type="button"
               className="card banya-addon-card"
-              role="button"
-              tabIndex={0}
               aria-haspopup="dialog"
               onClick={() => setSelected(a.id)}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  e.preventDefault();
-                  setSelected(a.id);
-                }
-              }}
             >
-              <div className="card-num">{a.num}</div>
-              <h3>{a.title}</h3>
-              <p>{a.desc}</p>
-            </article>
+              <span className="card-num">{a.num}</span>
+              <span className="banya-addon-card__title">{a.title}</span>
+              <span className="banya-addon-card__desc">{a.desc}</span>
+              <span className="banya-addon-card__more">Подробнее →</span>
+            </button>
           ))}
         </div>
       </div>
